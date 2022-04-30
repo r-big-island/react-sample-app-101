@@ -7,7 +7,7 @@ interface statesSampleType {
 }
 
 const App: React.FC<statesSampleType> = (props) => {
-  const [name, setName] = useState(props.name);
+  const [name, setName] = useState<string>(props.name);
   const [price, setPrice] = useState<number>(props.price);
 
   const reset = () => {
