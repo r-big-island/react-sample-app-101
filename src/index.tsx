@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <App name={''} price={1000} />
   </React.StrictMode>
 );
 

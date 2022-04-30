@@ -1,49 +1,34 @@
+import { type } from '@testing-library/user-event/dist/type';
 import React, { useState }  from 'react';
 
-const App: React.FC = () => {
-  const initialState = 0;
-  const [count, setCount] = useState<number>(initialState);
+interface statesSampleType {
+  name: string;
+  price: number;
+}
 
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
+const App: React.FC<statesSampleType> = (props) => {
+  const [name, setName] = useState(props.name);
+  const [price, setPrice] = useState<number>(props.price);
 
-  const increment2 = () => setCount(previousCount => previousCount + 1);
-  const decrement2 = () => setCount(previousCount => previousCount - 1);
-
-  const reset = () => setCount(initialState);
-  const double = () => setCount(previousCount => previousCount * 2);
-  // ▼ 自分の実装
-  const devideMultipleOfThree = () => {
-    const devidedCount: number = count / 3;
-    if (Number.isInteger(devidedCount)) setCount(devidedCount);
+  const reset = () => {
+    setPrice(props.price);
+    setName(props.name);
   }
-  // ▼ 参考の実装
-  const devide3 = () => setCount(previousCount => {
-    return previousCount % 3 === 0 ? previousCount /3 : previousCount;
-  });
-
-  // JSXは、returnする要素のトップレベルは一つだけ！
   return (
-    // JSXの表記方法
-    <React.Fragment>
-      {/* トップレベルの要素を2つ以上に保ちたい時はReact.Fragment,または<></>で囲む */}
-      <div>count: {count}</div>
-      <div>
-        {/* onClickに渡す関数を「イベントハンドラー」と呼ぶ */}
-        <button onClick={ increment }>+1</button>
-        <button onClick={ decrement }>-1</button>
-      </div>
-      <div>
-        <button onClick={ increment2 }>+1</button>
-        <button onClick={ decrement2 }>-1</button>
-      </div>
-      <div>
-        <button onClick={ reset }>Reset</button>
-        <button onClick={ double }>x2</button>
-        <button onClick={ devide3 }>3の倍数の時だけ3で割る</button>
-      </div>
-    </React.Fragment>
+    <>
+      <p>現在の{name}は、{price}円です。</p>
+      <button onClick={() => setPrice(price + 1)}>+1</button>
+      <button onClick={() => setPrice(price - 1)}>-1</button>
+      <button onClick={reset}>Reset</button>
+      {/* e.target.value: onChangeが発生したときにinput入力欄に入力されている値を拾う書き方（お約束的） */}
+      <input value={name} onChange={e => setName(e.target.value)} />
+    </>
   );
 }
+
+// App.defaultProps = {
+//   name: '',
+//   price: 1000
+// };
 
 export default App;
