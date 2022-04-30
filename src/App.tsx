@@ -1,5 +1,4 @@
-import { type } from '@testing-library/user-event/dist/type';
-import React, { useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
 
 interface statesSampleType {
   name: string;
@@ -18,6 +17,24 @@ const App: React.FC<statesSampleType> = (props) => {
     // setName(props.name);
     // setState(props);
   // }
+
+  // レンダリング（DOMが描画）された後に動く（画面上の値が変更されない場合は、ボタン押下などしてもレンダリングされない）
+  useEffect(() => {
+    console.log('This is like componentDidMount or componentDidUpdate.');
+  });
+  // useEffectの第二引数に空の配列（「[]」）を渡してあげると、初期描画レンダリングの直後のみ実行されるuseEffectを実装できる
+  useEffect(() => {
+    console.log('This is like componentDidMount');
+  }, []);
+  // 特定のパラメータ変更時のレンダリング直後のみ実行するuseEffectを実装する場合は、第二引数の配列に着目したいパラメータを渡しておく（通常のuseEffect同様、初期描画時にも動く）
+  useEffect(() => {
+    console.log('This callback is for name only');
+  }, [name]);
+  // const renderPeriod = () => {
+  //   console.log('renderPeriod renders period');
+  //   return '。';
+  // }
+
   return (
     <>
       <p>現在の{name}は、{price}円です。</p>
