@@ -11,14 +11,15 @@
 //   {id: 3, title: 'タイトル1, body: 'ボディー1' }
 // ]
 type eventForm = {
-  type: string;
-  title: string;
-  body: string;
+  type?: string;
+  title?: string;
+  body?: string;
+  id?: number;
 }
 type eventState = {
   id: number;
-  title: string;
-  body: string;
+  title?: string;
+  body?: string;
 }
 
 const events: (state: eventState[] | undefined, action: eventForm) => eventState[]
@@ -30,7 +31,7 @@ const events: (state: eventState[] | undefined, action: eventForm) => eventState
       let id: number = length === 0 ? 1 : state[length - 1].id + 1;
       return [...state, { id, ...event }];
     case 'DELETE_EVENT':
-
+      return state.filter(event => event.id !== action.id);
     case 'DELETE_ALL_EVENTS':
       return [];
     default:
