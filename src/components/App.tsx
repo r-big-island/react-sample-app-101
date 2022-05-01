@@ -2,18 +2,20 @@ import React, { useReducer, useState } from 'react';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Event from './Event';
 // 作成したreducerを利用するためのimport
 import reducer from '../reducers';
 
 type eventForm = {
-  type: string;
-  title: string;
-  body: string;
+  type?: string;
+  title?: string;
+  body?: string;
+  id?: number;
 }
 type eventState = {
   id: number;
-  title: string;
-  body: string;
+  title?: string;
+  body?: string;
 }
 
 const App = () => {
@@ -23,7 +25,7 @@ const App = () => {
 
   const addEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
-    console.log({title, body});
+    // console.log({title, body});
     dispatch({
       type: 'CREATE_EVENT',
       title: title,
@@ -62,9 +64,10 @@ const App = () => {
             <th>タイトル</th>
             <th>内容</th>
           </tr>
-          <tbody>
-          </tbody>
         </thead>
+        <tbody>
+          { state.map((event) => (<Event event={event} dispatch={dispatch}/>))}
+        </tbody>
       </table>
     </div>
   );
