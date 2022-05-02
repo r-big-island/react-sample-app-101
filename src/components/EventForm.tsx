@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions';
+
 type eventForm = {
   type?: string;
   title?: string;
@@ -19,7 +21,7 @@ const EventForm: React.FC<{ state: eventState[], dispatch: React.Dispatch<eventF
   const addEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     dispatch({
-      type: 'CREATE_EVENT',
+      type: CREATE_EVENT,
       title: title,
       body: body,
     });
@@ -32,7 +34,7 @@ const EventForm: React.FC<{ state: eventState[], dispatch: React.Dispatch<eventF
     // ボタンクリック時に発生するsubmit()を抑止して画面リロードを防ぐ（状態遷移を管理するSPAにおいて、変更したコンポーネントの状態以外も再読み込みされるのは考え方にそぐわないため）
     e.preventDefault();
     const result = window.confirm('全てのイベントを本当に削除しても良いですか？');
-    if (result) dispatch({ type: 'DELETE_ALL_EVENTS' });
+    if (result) dispatch({ type: DELETE_ALL_EVENTS });
   }
 
   const unCreatable: boolean = title === '' || body === '';
