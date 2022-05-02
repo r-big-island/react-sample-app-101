@@ -1,15 +1,3 @@
-// action = {
-//   type: 'CREATE_EVENT',
-//   title: '2020年東京オリンピックのお知らせ',
-//   body: '2020年に東京でオリンピックを開催します！つきましては・・・・・'
-// }
-// # before
-// state = []
-// state = [
-//   {id: 1, title: 'タイトル1, body: 'ボディー1' },
-//   {id: 2, title: 'タイトル1, body: 'ボディー1' },
-//   {id: 3, title: 'タイトル1, body: 'ボディー1' }
-// ]
 type eventForm = {
   type?: string;
   title?: string;
