@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 
+import { DELETE_EVENT } from '../actions';
+
 type eventForm = {
   type?: string;
   title?: string;
@@ -12,7 +14,7 @@ const Event: React.FC<{ event: eventForm, dispatch: React.Dispatch<eventForm> }>
   const id = event.id;
   const handleClickDeleteButton = () => {
     const result = window.confirm(`イベント(id=${id})を本当に削除して良いですか？`);
-    if (result) dispatch({ type: 'DELETE_EVENT', id});
+    if (result) dispatch({ type: DELETE_EVENT, id});
   }
   return (
     <tr>
