@@ -11,7 +11,8 @@ const Event: React.FC<{ event: eventForm, dispatch: React.Dispatch<eventForm> }>
 {
   const id = event.id;
   const handleClickDeleteButton = () => {
-    dispatch({ type: 'DELETE_EVENT', id})
+    const result = window.confirm(`イベント(id=${id})を本当に削除して良いですか？`);
+    if (result) dispatch({ type: 'DELETE_EVENT', id});
   }
   return (
     <tr>
