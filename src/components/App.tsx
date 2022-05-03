@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import EventForm from './EventForm';
 
@@ -13,23 +13,25 @@ type eventForm = {
   title?: string;
   body?: string;
   id?: number;
-}
+};
 type eventState = {
   id: number;
   title?: string;
   body?: string;
-}
+};
 
 const App: React.FC = () => {
-  const [state, dispatch] = useReducer<(state: eventState[] | undefined, action: eventForm) => eventState[]>(reducer, []);
+  const [state, dispatch] = useReducer<
+    (state: eventState[] | undefined, action: eventForm) => eventState[]
+  >(reducer, []);
 
   return (
     // JSX記法では、通常のHTMLとは異なるルールでダグのプロパティを作成する必要がある
-    <div className='container-fluid'>
-      <EventForm state={state} dispatch={dispatch}/>
-      <Events state={state} dispatch={dispatch}/>
+    <div className="container-fluid">
+      <EventForm state={state} dispatch={dispatch} />
+      <Events state={state} dispatch={dispatch} />
     </div>
   );
-}
+};
 
 export default App;

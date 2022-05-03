@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import Event from './Event';
 
@@ -7,18 +7,21 @@ type eventForm = {
   title?: string;
   body?: string;
   id?: number;
-}
+};
 type eventState = {
   id: number;
   title?: string;
   body?: string;
-}
+};
 
-const Events: React.FC<{ state: eventState[], dispatch: React.Dispatch<eventForm> }> = ({state, dispatch}) => {
+const Events: React.FC<{
+  state: eventState[];
+  dispatch: React.Dispatch<eventForm>;
+}> = ({ state, dispatch }) => {
   return (
     <>
       <h4>イベント一覧</h4>
-      <table className='table table-hover'>
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
@@ -27,11 +30,13 @@ const Events: React.FC<{ state: eventState[], dispatch: React.Dispatch<eventForm
           </tr>
         </thead>
         <tbody>
-          { state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch}/>))}
+          {state.map((event, index) => (
+            <Event key={index} event={event} dispatch={dispatch} />
+          ))}
         </tbody>
       </table>
     </>
-  )
-}
+  );
+};
 
-export default Events
+export default Events;
