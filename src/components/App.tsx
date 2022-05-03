@@ -27,10 +27,12 @@ const App: React.FC = () => {
   >(reducer, []);
 
   return (
-    // React Hooksが導入されるより前の書き方
+    // React Hooksが導入されてからの書き方（Provider側は変更なし）
+    // AppContext.Providerタグに囲まれた要素であれば、孫コンポーネントになってもvalueに渡されたデータをProvideすることができる
     <AppContext.Provider value={'Hello, I am a Provider'}>
       {/* JSX記法では、通常のHTMLとは異なるルールでダグのプロパティを作成する必要がある */}
       <div className="container-fluid">
+        {/* useContextを使えば下記コンポーネント内でvalue値を参照することができる様になる！（孫コンポーネントに値を渡すためにデータのバケツリレーをせずに済む！！ */}
         <EventForm state={state} dispatch={dispatch} />
         <Events state={state} dispatch={dispatch} />
       </div>
