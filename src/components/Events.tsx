@@ -15,16 +15,11 @@ type eventState = {
   body?: string;
 };
 
-const Events: React.FC<{
-  state: eventState[];
-  dispatch: React.Dispatch<eventForm>;
-}> = ({ state, dispatch }) => {
+const Events: React.FC<{}> = () => {
   // React Hooksが導入されてからの書き方
-  const value = useContext(AppContext);
+  const { state } = useContext(AppContext);
   return (
     <>
-      {/* React Hooksが導入されてからの書き方 */}
-      <div>{value}</div>
       <h4>イベント一覧</h4>
       <table className="table table-hover">
         <thead>
@@ -35,8 +30,8 @@ const Events: React.FC<{
           </tr>
         </thead>
         <tbody>
-          {state.map((event, index) => (
-            <Event key={index} event={event} dispatch={dispatch} />
+          {state.map((event: eventState, index: number) => (
+            <Event key={index} event={event} />
           ))}
         </tbody>
       </table>
