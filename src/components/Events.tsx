@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Event from './Event';
 import AppContext from '../contexts/AppContext';
@@ -19,14 +19,12 @@ const Events: React.FC<{
   state: eventState[];
   dispatch: React.Dispatch<eventForm>;
 }> = ({ state, dispatch }) => {
+  // React Hooksが導入されてからの書き方
+  const value = useContext(AppContext);
   return (
     <>
-      {/* React Hooksが導入されるより前の書き方 */}
-      <AppContext.Consumer>
-        {(value) => {
-          return <div>{value}</div>;
-        }}
-      </AppContext.Consumer>
+      {/* React Hooksが導入されてからの書き方 */}
+      <div>{value}</div>
       <h4>イベント一覧</h4>
       <table className="table table-hover">
         <thead>
