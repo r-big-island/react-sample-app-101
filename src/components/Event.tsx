@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { DELETE_EVENT } from '../actions';
+import AppContext from '../contexts/AppContext';
 
 type eventForm = {
   type?: string;
@@ -11,14 +12,14 @@ type eventForm = {
 
 const Event: React.FC<{
   event: eventForm;
-  dispatch: React.Dispatch<eventForm>;
-}> = ({ event, dispatch }) => {
+}> = ({ event }) => {
+  const { dispatch } = useContext(AppContext);
   const id = event.id;
   const handleClickDeleteButton = () => {
     const result = window.confirm(
       `イベント(id=${id})を本当に削除して良いですか？`
     );
-    if (result) dispatch({ type: DELETE_EVENT, id });
+    if (result && dispatch != undefined) dispatch({ type: DELETE_EVENT, id });
   };
   return (
     <tr>

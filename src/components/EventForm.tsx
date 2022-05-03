@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions';
+import AppContext from '../contexts/AppContext';
 
 type eventForm = {
   type?: string;
@@ -14,20 +15,19 @@ type eventState = {
   body?: string;
 };
 
-const EventForm: React.FC<{
-  state: eventState[];
-  dispatch: React.Dispatch<eventForm>;
-}> = ({ state, dispatch }) => {
+const EventForm: React.FC<{}> = () => {
+  const { state, dispatch } = useContext(AppContext);
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
 
   const addEvent = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch({
-      type: CREATE_EVENT,
-      title: title,
-      body: body,
-    });
+    if (dispatch != undefined)
+      dispatch({
+        type: CREATE_EVENT,
+        title: title,
+        body: body,
+      });
     // 登録処理後に入力値を初期化
     setTitle('');
     setBody('');
@@ -39,7 +39,7 @@ const EventForm: React.FC<{
     const result = window.confirm(
       '全てのイベントを本当に削除しても良いですか？'
     );
-    if (result) dispatch({ type: DELETE_ALL_EVENTS });
+    if (result && dispatch != undefined) dispatch({ type: DELETE_ALL_EVENTS });
   };
 
   const unCreatable: boolean = title === '' || body === '';
