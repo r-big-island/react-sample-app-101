@@ -1,22 +1,12 @@
 import React, { useState, useContext } from 'react';
+import { eventForm, eventState } from '../@types/orgTypes';
 
 import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions';
 import AppContext from '../contexts/AppContext';
 
-type eventForm = {
-  type?: string;
-  title?: string;
-  body?: string;
-  id?: number;
-};
-type eventState = {
-  id: number;
-  title?: string;
-  body?: string;
-};
-
 const EventForm: React.FC<{}> = () => {
   const { state, dispatch } = useContext(AppContext);
+  // const events = state.events;
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
 
@@ -43,7 +33,7 @@ const EventForm: React.FC<{}> = () => {
   };
 
   const unCreatable: boolean = title === '' || body === '';
-  const unDeletable: boolean = state.length === 0;
+  const unDeletable: boolean = state.events.length === 0;
   return (
     <>
       <h4>イベント作成フォーム</h4>
