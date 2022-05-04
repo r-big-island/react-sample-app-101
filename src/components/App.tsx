@@ -3,7 +3,7 @@ import {
   eventForm,
   eventState,
   appStates,
-  appContext,
+  operationLog,
 } from '../@types/orgTypes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +18,11 @@ import events from '../reducers/events';
 
 const App: React.FC = () => {
   const initialEvent: eventState[] = [];
-  const initialState: appStates = { events: initialEvent };
+  const initialOpeLog: operationLog[] = [];
+  const initialState: appStates = {
+    events: initialEvent,
+    operationLogs: initialOpeLog,
+  };
   const [appState, dispatch] = useReducer<
     (state: appStates, action: eventForm) => any
   >(reducer, initialState);

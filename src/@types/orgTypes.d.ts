@@ -11,8 +11,14 @@ export type eventState = {
   body?: string;
 };
 
+export type operationLog = {
+  description?: string;
+  operatedAt?: string;
+};
+
 export type appStates = {
   events: eventState[];
+  operationLogs: operationLog[];
 };
 
 export type appContext = {
