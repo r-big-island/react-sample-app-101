@@ -1,8 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { eventForm, eventState } from '../@types/orgTypes';
 
-import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../actions';
+import {
+  CREATE_EVENT,
+  DELETE_ALL_EVENTS,
+  ADD_OPERATION_LOG,
+  DELETE_ALL_OPERATION_LOGS,
+} from '../actions';
+
 import AppContext from '../contexts/AppContext';
+import { timeCurrentIso8601 } from '../utils/utils';
 
 const EventForm: React.FC<{}> = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -14,9 +21,22 @@ const EventForm: React.FC<{}> = () => {
     e.preventDefault();
     if (dispatch != undefined)
       dispatch({
-        type: CREATE_EVENT,
-        title: title,
-        body: body,
+        eventForm: {
+          type: CREATE_EVENT,
+          title: title,
+          body: body,
+        },
+        operationForm: {},
+      });
+
+    if (dispatch != undefined)
+      dispatch({
+        eventForm: {},
+        operationForm: {
+          type: ADD_OPERATION_LOG,
+          description: 'イベントを作成しました。',
+          operatedAt: timeCurrentIso8601(),
+        },
       });
     // 登録処理後に入力値を初期化
     setTitle('');
@@ -29,7 +49,15 @@ const EventForm: React.FC<{}> = () => {
     const result = window.confirm(
       '全てのイベントを本当に削除しても良いですか？'
     );
-    if (result && dispatch != undefined) dispatch({ type: DELETE_ALL_EVENTS });
+    if (result && dispatch != undefined)
+      dispatch({
+        eventForm: { type: DELETE_ALL_EVENTS },
+        operationForm: {
+          type: ADD_OPERATION_LOG,
+          description: '全てのイベントを削除しました。',
+          operatedAt: timeCurrentIso8601(),
+        },
+      });
   };
 
   const unCreatable: boolean = title === '' || body === '';
