@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import {
   eventForm,
+  actions,
   eventState,
   appStates,
   operationLog,
@@ -24,7 +25,7 @@ const App: React.FC = () => {
     operationLogs: initialOpeLog,
   };
   const [appState, dispatch] = useReducer<
-    (state: appStates, action: eventForm) => any
+    (state: appStates, action: actions) => any
   >(reducer, initialState);
   const state: appStates = appState;
 

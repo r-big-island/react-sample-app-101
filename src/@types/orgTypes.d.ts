@@ -16,6 +16,17 @@ export type operationLog = {
   operatedAt?: string;
 };
 
+export type operationForm = {
+  type?: string;
+  description?: string;
+  operatedAt?: string;
+};
+
+export type actions = {
+  eventForm: eventForm;
+  operationForm: operationForm;
+};
+
 export type appStates = {
   events: eventState[];
   operationLogs: operationLog[];
@@ -23,5 +34,5 @@ export type appStates = {
 
 export type appContext = {
   state: appStates;
-  dispatch?: React.Dispatch<eventForm>;
+  dispatch?: React.Dispatch<actions>;
 };
