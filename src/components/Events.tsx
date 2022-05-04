@@ -1,23 +1,13 @@
 import React, { useContext } from 'react';
+import { eventForm, eventState } from '../@types/orgTypes';
 
 import Event from './Event';
 import AppContext from '../contexts/AppContext';
 
-type eventForm = {
-  type?: string;
-  title?: string;
-  body?: string;
-  id?: number;
-};
-type eventState = {
-  id: number;
-  title?: string;
-  body?: string;
-};
-
 const Events: React.FC<{}> = () => {
   // React Hooksが導入されてからの書き方
   const { state } = useContext(AppContext);
+  const events = state.events;
   return (
     <>
       <h4>イベント一覧</h4>
@@ -30,7 +20,7 @@ const Events: React.FC<{}> = () => {
           </tr>
         </thead>
         <tbody>
-          {state.map((event: eventState, index: number) => (
+          {events.map((event: eventState, index: number) => (
             <Event key={index} event={event} />
           ))}
         </tbody>
