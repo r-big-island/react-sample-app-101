@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { eventState } from '../@types/orgTypes';
+import { eventState, operationLog } from '../@types/orgTypes';
 
 import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../reducers/events';
-import { ADD_OPERATION_LOG } from '../reducers/operationLogs';
+import {
+  ADD_OPERATION_LOG,
+  DELETE_ALL_OPERATION_LOGS,
+} from '../reducers/operationLogs';
 import { AppDispatch } from '../store/store';
 import { timeCurrentIso8601 } from '../utils/utils';
 
 const EventForm: React.FC<{}> = () => {
   const dispatch: AppDispatch = useAppDispatch();
   const events: eventState[] = useAppSelector((state) => state.events);
+  const opeLog: operationLog[] = useAppSelector((state) => state.operationLogs);
 
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
@@ -48,6 +52,16 @@ const EventForm: React.FC<{}> = () => {
         })
       );
     }
+  };
+
+  const deleteAllOperationLogs = (
+    e: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    const result = window.confirm(
+      '全ての操作ログを本当に削除しても良いですか？'
+    );
+    if (result) dispatch(DELETE_ALL_OPERATION_LOGS());
   };
 
   const unCreatable: boolean = title === '' || body === '';
@@ -90,6 +104,13 @@ const EventForm: React.FC<{}> = () => {
           disabled={unDeletable}
         >
           全てのイベントを削除する
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={deleteAllOperationLogs}
+          disabled={opeLog.length === 0}
+        >
+          全ての操作ログを削除する
         </button>
       </form>
     </>
