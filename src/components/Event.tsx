@@ -3,6 +3,8 @@ import { eventState } from '../@types/orgTypes';
 
 import { DELETE_EVENT } from '../reducers/events';
 import { useAppDispatch } from '../app/hooks';
+import { ADD_OPERATION_LOG } from '../reducers/operationLogs';
+import { timeCurrentIso8601 } from '../utils/utils';
 
 const Event: React.FC<{
   event: eventState;
@@ -13,7 +15,15 @@ const Event: React.FC<{
     const result = window.confirm(
       `イベント(id=${id})を本当に削除して良いですか？`
     );
-    if (result) dispatch(DELETE_EVENT({ id }));
+    if (result) {
+      dispatch(DELETE_EVENT({ id }));
+      dispatch(
+        ADD_OPERATION_LOG({
+          description: `イベント(id=${id}を削除しました。)`,
+          operatedAt: timeCurrentIso8601(),
+        })
+      );
+    }
   };
 
   return (
