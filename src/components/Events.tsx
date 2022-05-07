@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
-import { eventForm, eventState } from '../@types/orgTypes';
+import React from 'react';
+import { eventState } from '../@types/orgTypes';
+import { useAppSelector } from '../app/hooks';
 
 import Event from './Event';
-import AppContext from '../contexts/AppContext';
 
 const Events: React.FC<{}> = () => {
-  // React Hooksが導入されてからの書き方
-  const { state } = useContext(AppContext);
-  const events = state.events;
+  const events: eventState[] = useAppSelector((state) => state.events);
   return (
     <>
       <h4>イベント一覧</h4>

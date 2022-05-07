@@ -1,21 +1,21 @@
-import React, { FC, useContext } from 'react';
-import { actions, eventForm } from '../@types/orgTypes';
+import React from 'react';
+import { eventState } from '../@types/orgTypes';
 
-import { DELETE_EVENT } from '../actions';
-import AppContext from '../contexts/AppContext';
+import { DELETE_EVENT } from '../reducers/events';
+import { useAppDispatch } from '../app/hooks';
 
 const Event: React.FC<{
-  event: eventForm;
+  event: eventState;
 }> = ({ event }) => {
-  const { dispatch } = useContext(AppContext);
+  const dispatch = useAppDispatch();
   const id = event.id;
   const handleClickDeleteButton = () => {
     const result = window.confirm(
       `イベント(id=${id})を本当に削除して良いですか？`
     );
-    if (result && dispatch != undefined)
-      dispatch({ eventForm: { type: DELETE_EVENT, id }, operationForm: {} });
+    if (result) dispatch(DELETE_EVENT({ id }));
   };
+
   return (
     <tr>
       <td>{id}</td>
