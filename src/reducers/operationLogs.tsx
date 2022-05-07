@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  actions,
-  appStates,
-  operationForm,
-  operationLog,
-} from '../@types/orgTypes';
-// import { ADD_OPERATION_LOG, DELETE_ALL_OPERATION_LOGS } from '../actions';
+import { operationForm, operationLog } from '../@types/orgTypes';
 
 const initialState: operationLog[] = [];
 
