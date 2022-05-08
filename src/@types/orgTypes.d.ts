@@ -32,16 +32,16 @@ export type appStates = {
   operationLogs: operationLog[];
 };
 
-export type appContext = {
-  state: appStates;
-  // dispatch?: React.Dispatch<actions>;
-  dispatch?: ThunkDispatch<
-    {
-      events: eventState[];
-      operationLogs: operationLog[];
-    },
-    undefined,
-    AnyAction
-  > &
-    Dispatch<AnyAction>;
-};
+// export type appContext = {
+//   state: appStates;
+//   // dispatch?: React.Dispatch<actions>;
+//   dispatch?: ThunkDispatch<
+//     {
+//       events: eventState[];
+//       operationLogs: operationLog[];
+//     },
+//     undefined,
+//     AnyAction
+//   > &
+//     Dispatch<AnyAction>;
+// };
