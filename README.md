@@ -21,5 +21,5 @@ If you have already installed docker engine, you can also use this.
 
 # LocalStrage
 
-This app stores its state (data) in localStrage to persist it even after re-load　browsers.
+This app stores its state (data) in localStrage to persist it even after re-load browsers.\
 Hence you need you've gotta push erase-button in the app so that you make sure your localStorage getting clean after testing.
