@@ -1,11 +1,11 @@
 import React from 'react';
-import { operationLog } from '../@types/orgTypes';
+import { appStates, operationLog } from '../@types/orgTypes';
 import { useAppSelector } from '../app/hooks';
 import OperationLog from './OperationLog';
 
 const OperationLogs: React.FC<{}> = () => {
   const operationLogs: operationLog[] = useAppSelector(
-    (state) => state.operationLogs
+    (state: appStates) => state.operationLogs
   );
   return (
     <>

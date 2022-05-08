@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { eventState, operationLog } from '../@types/orgTypes';
+import { appStates, eventState, operationLog } from '../@types/orgTypes';
 
 import { CREATE_EVENT, DELETE_ALL_EVENTS } from '../reducers/events';
 import {
@@ -12,8 +12,12 @@ import { timeCurrentIso8601 } from '../utils/utils';
 
 const EventForm: React.FC<{}> = () => {
   const dispatch: AppDispatch = useAppDispatch();
-  const events: eventState[] = useAppSelector((state) => state.events);
-  const opeLog: operationLog[] = useAppSelector((state) => state.operationLogs);
+  const events: eventState[] = useAppSelector(
+    (state: appStates) => state.events
+  );
+  const opeLog: operationLog[] = useAppSelector(
+    (state: appStates) => state.operationLogs
+  );
 
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');

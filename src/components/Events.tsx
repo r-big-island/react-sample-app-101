@@ -1,11 +1,13 @@
 import React from 'react';
-import { eventState } from '../@types/orgTypes';
+import { appStates, eventState } from '../@types/orgTypes';
 import { useAppSelector } from '../app/hooks';
 
 import Event from './Event';
 
 const Events: React.FC<{}> = () => {
-  const events: eventState[] = useAppSelector((state) => state.events);
+  const events: eventState[] = useAppSelector(
+    (state: appStates) => state.events
+  );
   return (
     <>
       <h4>イベント一覧</h4>

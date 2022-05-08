@@ -5,11 +5,12 @@ import { DELETE_EVENT } from '../reducers/events';
 import { useAppDispatch } from '../app/hooks';
 import { ADD_OPERATION_LOG } from '../reducers/operationLogs';
 import { timeCurrentIso8601 } from '../utils/utils';
+import { AppDispatch } from '../store/store';
 
 const Event: React.FC<{
   event: eventState;
 }> = ({ event }) => {
-  const dispatch = useAppDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
   const id = event.id;
   const handleClickDeleteButton = () => {
     const result = window.confirm(
