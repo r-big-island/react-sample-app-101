@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { CREATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENTS } from '../actions';
 import { eventForm, eventState } from '../@types/orgTypes';
+import { APP_KEY } from '../actions';
 
-const initialState: eventState[] = [];
+// データの永続化対応
+const storedData: string | null = localStorage.getItem(APP_KEY);
+const initialState: eventState[] = storedData
+  ? JSON.parse(storedData).events
+  : [];
 
 const eventsSlice = createSlice({
   name: 'events',

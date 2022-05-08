@@ -4,3 +4,5 @@ export const DELETE_ALL_EVENTS = 'DELETE_ALL_EVENTS';
 
 export const ADD_OPERATION_LOG = 'ADD_OPERATION_LOG';
 export const DELETE_ALL_OPERATION_LOGS = 'DELETE_ALL_OPERATION_LOGS';
+
+export const APP_KEY = 'appWithRedux';

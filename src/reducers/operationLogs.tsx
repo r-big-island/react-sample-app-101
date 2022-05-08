@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { operationForm, operationLog } from '../@types/orgTypes';
+import { APP_KEY } from '../actions';
 
-const initialState: operationLog[] = [];
+// データの永続化対応
+const storedData: string | null = localStorage.getItem(APP_KEY);
+const initialState: operationLog[] = storedData
+  ? JSON.parse(storedData).operationLogs
+  : [];
 
 const opeLogSlice = createSlice({
   name: 'operationLog',
