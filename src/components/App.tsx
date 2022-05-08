@@ -6,6 +6,7 @@ import EventForm from './EventForm';
 import Events from './Events';
 import store from '../store/store';
 import { Provider } from 'react-redux';
+import OperationLogs from './OperationLogs';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       <div className="container-fluid">
         <EventForm />
         <Events />
+        <OperationLogs />
       </div>
     </Provider>
   );
