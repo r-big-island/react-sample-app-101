@@ -18,8 +18,3 @@ You will also see any lint errors in the console.
 
 Runs the app with docker-compose.\
 If you have already installed docker engine, you can also use this.
-
-# LocalStrage
-
-This app stores its state (data) in localStrage to persist it even after re-load browsers.\
-Hence you've gotta click erase-buttons in the app so that you make sure your localStorage getting clean after testing in case.
